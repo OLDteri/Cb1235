@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>АнимеГо - Смотреть аниме онлайн</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#00b0ff',secondary:'#ff6b00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Montserrat', sans-serif;
+background-color: #1a1b1e;
+color: #ffffff;
+}
+.anime-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.anime-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 20px rgba(0, 176, 255, 0.2);
+}
+.anime-card:hover .card-overlay {
+opacity: 1;
+}
+.card-overlay {
+opacity: 0;
+transition: opacity 0.3s ease;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+}
+.search-input:focus {
+box-shadow: 0 0 0 2px rgba(0, 176, 255, 0.5);
+}
+.genre-tag {
+transition: background-color 0.3s ease;
+}
+.genre-tag:hover {
+background-color: rgba(0, 176, 255, 0.8);
+}
+.custom-scrollbar::-webkit-scrollbar {
+width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+background: #2a2b30;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: #00b0ff;
+border-radius: 8px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.banner-gradient {
+background: linear-gradient(to right, rgba(26, 27, 30, 0.9) 0%, rgba(26, 27, 30, 0.7) 30%, rgba(26, 27, 30, 0) 60%);
+}
+.nav-item {
+position: relative;
+}
+.nav-item::after {
+content: '';
+position: absolute;
+bottom: -2px;
+left: 50%;
+width: 0;
+height: 2px;
+background-color: #00b0ff;
+transition: all 0.3s ease;
+transform: translateX(-50%);
+}
+.nav-item:hover::after {
+width: 100%;
+}
+.custom-switch {
+position: relative;
+display: inline-block;
+width: 40px;
+height: 20px;
+}
+.custom-switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.switch-slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #2a2b30;
+transition: .4s;
+border-radius: 20px;
+}
+.switch-slider:before {
+position: absolute;
+content: "";
+height: 16px;
+width: 16px;
+left: 2px;
+bottom: 2px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .switch-slider {
+background-color: #00b0ff;
+}
+input:checked + .switch-slider:before {
+transform: translateX(20px);
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#1a1b1e] shadow-lg">
+<div class="container mx-auto px-4">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center">
+<a href="#" class="flex items-center">
+<span class="text-primary text-2xl font-['Pacifico']">АнимеГо</span>
+</a>
+</div>
+<!-- Navigation -->
+<nav class="hidden md:flex space-x-6">
+<a href="#" class="nav-item text-white hover:text-primary transition-colors">Главная</a>
+<a href="#" class="nav-item text-white hover:text-primary transition-colors">Каталог</a>
+<a href="#" class="nav-item text-white hover:text-primary transition-colors">Расписание</a>
+<a href="#" class="nav-item text-white hover:text-primary transition-colors">Случайное</a>
+<a href="#" class="nav-item text-white hover:text-primary transition-colors">Новости</a>
+</nav>
+<!-- Search Bar -->
+<div class="hidden md:flex items-center relative flex-1 max-w-md mx-6">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3">
+<div class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+</div>
+<input type="text" class="search-input w-full bg-[#2a2b30] text-white border-none !rounded-button pl-10 pr-4 py-2 focus:outline-none" placeholder="Поиск аниме...">
+</div>
+<!-- User Actions -->
+<div class="flex items-center space-x-4">
+<button id="loginButton" class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+Войти
+</button>
+<div id="loginModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center">
+<div class="bg-[#2a2b30] rounded-lg w-full max-w-md p-6 relative">
+<button id="closeLoginModal" class="absolute right-4 top-4 text-gray-400 hover:text-white">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-close-line"></i>
+</div>
+</button>
+<h2 class="text-2xl font-bold mb-6">Войти в аккаунт</h2>
+<form id="loginForm" class="space-y-4">
+<div>
+<label class="block text-sm text-gray-400 mb-1">Email или логин</label>
+<input type="text" id="loginEmail" class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2" required>
+</div>
+<div>
+<label class="block text-sm text-gray-400 mb-1">Пароль</label>
+<input type="password" id="loginPassword" class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2" required>
+</div>
+<div class="flex items-center justify-between">
+<label class="flex items-center">
+<input type="checkbox" id="rememberMe" class="hidden">
+<div class="w-4 h-4 border border-[#3a3b40] !rounded-button mr-2 flex items-center justify-center">
+<i class="ri-check-line text-primary hidden"></i>
+</div>
+<span class="text-sm text-gray-400">Запомнить меня</span>
+</label>
+<a href="#" class="text-sm text-primary hover:text-blue-400">Забыли пароль?</a>
+</div>
+<button type="submit" class="w-full bg-primary hover:bg-blue-500 text-white py-2 !rounded-button whitespace-nowrap transition-colors">
+Войти
+</button>
+</form>
+<div class="relative my-6">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-[#3a3b40]"></div>
+</div>
+<div class="relative flex justify-center">
+<span class="bg-[#2a2b30] px-2 text-sm text-gray-400">или войти через</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button id="vkAuthButton" class="flex items-center justify-center bg-[#1a1b1e] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-vk-fill"></i>
+</div>
+ВКонтакте
+</button>
+<button class="flex items-center justify-center bg-[#1a1b1e] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-telegram-fill"></i>
+</div>
+Telegram
+</button>
+</div>
+<p class="mt-6 text-center text-sm text-gray-400">
+Нет аккаунта?
+<a href="#" class="text-primary hover:text-blue-400">Зарегистрироваться</a>
+</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+Регистрация
+</button>
+<div class="w-10 h-10 flex items-center justify-center bg-[#2a2b30] rounded-full cursor-pointer hover:bg-[#3a3b40] transition-colors md:hidden">
+<i class="ri-menu-line text-white ri-lg"></i>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-16">
+<!-- Banner Section -->
+<section class="relative w-full h-[500px] overflow-hidden">
+<div class="absolute inset-0" style="background-image: url('https://readdy.ai/api/search-image?query=anime%20scene%20with%20dynamic%20action%2C%20vibrant%20colors%2C%20dramatic%20lighting%2C%20detailed%20character%20design%2C%20emotional%20moment%20from%20popular%20anime%2C%20cinematic%20composition%2C%20high%20quality%20digital%20art&width=1280&height=500&seq=1&orientation=landscape'); background-size: cover; background-position: center;"></div>
+<div class="absolute inset-0 banner-gradient"></div>
+<div class="container mx-auto px-4 h-full relative z-10">
+<div class="flex flex-col justify-center h-full max-w-2xl">
+<span class="text-primary font-semibold mb-2">Премьера сезона</span>
+<h1 class="text-4xl md:text-5xl font-bold mb-4">Атака Титанов: Финальный сезон</h1>
+<div class="flex items-center mb-4 space-x-4">
+<div class="flex items-center">
+<div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="ml-1">9.8</span>
+</div>
+<span class="text-gray-300">2023</span>
+<span class="px-2 py-1 bg-primary/20 text-primary text-xs !rounded-button">ТВ-сериал</span>
+</div>
+<p class="text-gray-300 mb-6 line-clamp-3">Эрен и его товарищи из Разведкорпуса достигают моря и узнают правду о мире за стенами. Теперь им предстоит финальная битва, которая определит судьбу всего человечества.</p>
+<div class="flex space-x-4">
+<button class="bg-primary hover:bg-blue-500 text-white px-6 py-3 !rounded-button whitespace-nowrap transition-colors flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-play-fill"></i>
+</div>
+Смотреть
+</button>
+<button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-6 py-3 !rounded-button whitespace-nowrap transition-colors flex items-center">
+<div class="w-5 h-5 flex items-center justify-center mr-2">
+<i class="ri-add-line"></i>
+</div>
+В избранное
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Section -->
+<section class="container mx-auto px-4 py-8">
+<div class="flex flex-col md:flex-row gap-8">
+<!-- Main Content -->
+<div class="flex-1">
+<!-- Categories -->
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold">Новые поступления</h2>
+<div class="flex space-x-2">
+<button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+Все
+</button>
+<button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+Сегодня
+</button>
+<button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+Вчера
+</button>
+</div>
+</div>
+<!-- Anime Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-10">
+<!-- Anime Card 1 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20blue%20hair%2C%20fantasy%20setting%2C%20magical%20elements%2C%20detailed%20anime%20style%20artwork%2C%20vibrant%20colors%2C%20emotional%20expression%2C%20high%20quality%20digital%20art&width=300&height=400&seq=2&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 24</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.2</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Фэнтези</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Приключения</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Магическая битва</h3>
+<p class="text-xs text-gray-400">呪術廻戦</p>
+</div>
+</div>
+<!-- Anime Card 2 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20blonde%20hair%2C%20school%20uniform%2C%20slice%20of%20life%20setting%2C%20detailed%20anime%20style%20artwork%2C%20soft%20lighting%2C%20casual%20pose%2C%20high%20quality%20digital%20art&width=300&height=400&seq=3&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 12</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">8.7</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Комедия</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Романтика</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Моя девушка не может быть такой милой</h3>
+<p class="text-xs text-gray-400">俺の彼女と幼なじみが修羅場すぎる</p>
+</div>
+</div>
+<!-- Anime Card 3 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20red%20hair%2C%20action%20pose%2C%20battle%20scene%2C%20intense%20expression%2C%20detailed%20anime%20style%20artwork%2C%20dynamic%20lighting%2C%20high%20quality%20digital%20art&width=300&height=400&seq=4&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 8</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.5</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Боевик</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Сёнен</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Клинок, рассекающий демонов</h3>
+<p class="text-xs text-gray-400">鬼滅の刃</p>
+</div>
+</div>
+<!-- Anime Card 4 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20black%20hair%2C%20cyberpunk%20setting%2C%20futuristic%20elements%2C%20detailed%20anime%20style%20artwork%2C%20neon%20lighting%2C%20serious%20expression%2C%20high%20quality%20digital%20art&width=300&height=400&seq=5&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 10</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">8.9</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Киберпанк</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Научная фантастика</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Киберпанк: Бегущие по краю</h3>
+<p class="text-xs text-gray-400">サイバーパンク エッジランナーズ</p>
+</div>
+</div>
+<!-- Anime Card 5 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20green%20hair%2C%20fantasy%20world%2C%20magical%20creatures%2C%20detailed%20anime%20style%20artwork%2C%20mystical%20atmosphere%2C%20adventurous%20pose%2C%20high%20quality%20digital%20art&width=300&height=400&seq=6&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 15</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.0</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Исекай</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Фэнтези</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Реинкарнация безработного</h3>
+<p class="text-xs text-gray-400">無職転生</p>
+</div>
+</div>
+<!-- Anime Card 6 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20purple%20hair%2C%20magical%20girl%2C%20colorful%20background%2C%20detailed%20anime%20style%20artwork%2C%20cute%20expression%2C%20sparkly%20effects%2C%20high%20quality%20digital%20art&width=300&height=400&seq=7&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 6</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">8.5</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Махо-сёдзё</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Комедия</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Волшебница Мадока★Магика</h3>
+<p class="text-xs text-gray-400">魔法少女まどか★マギカ</p>
+</div>
+</div>
+<!-- Anime Card 7 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20white%20hair%2C%20post-apocalyptic%20setting%2C%20survival%20theme%2C%20detailed%20anime%20style%20artwork%2C%20gritty%20atmosphere%2C%20determined%20expression%2C%20high%20quality%20digital%20art&width=300&height=400&seq=8&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 18</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.3</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Постапокалипсис</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Драма</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Обещанный Неверленд</h3>
+<p class="text-xs text-gray-400">約束のネバーランド</p>
+</div>
+</div>
+<!-- Anime Card 8 -->
+<div class="anime-card bg-[#2a2b30] rounded overflow-hidden">
+<div class="relative">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20orange%20hair%2C%20sports%20theme%2C%20dynamic%20action%2C%20detailed%20anime%20style%20artwork%2C%20energetic%20pose%2C%20competitive%20atmosphere%2C%20high%20quality%20digital%20art&width=300&height=400&seq=9&orientation=portrait" alt="Аниме" class="w-full h-[250px] object-cover">
+<div class="card-overlay absolute inset-0 flex flex-col justify-end p-3">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Серия 22</span>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">8.8</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Спорт</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Сёнен</span>
+</div>
+</div>
+</div>
+<div class="p-3">
+<h3 class="font-semibold text-sm line-clamp-2">Волейбол!!</h3>
+<p class="text-xs text-gray-400">ハイキュー!!</p>
+</div>
+</div>
+</div>
+<!-- Popular Section -->
+<div class="mb-10">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold">Популярное</h2>
+<a href="#" class="text-primary hover:text-blue-400 transition-colors flex items-center">
+Смотреть все
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-arrow-right-line"></i>
+</div>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Popular Anime 1 -->
+<div class="bg-[#2a2b30] rounded overflow-hidden flex">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20determined%20expression%2C%20battle%20ready%20pose%2C%20intense%20action%20scene%2C%20detailed%20anime%20style%20artwork%2C%20dynamic%20composition%2C%20high%20quality%20digital%20art&width=200&height=150&seq=10&orientation=landscape" alt="Популярное аниме" class="w-[120px] h-[120px] object-cover">
+<div class="p-3 flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-sm line-clamp-1">Ван Пис</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.7</span>
+</div>
+</div>
+<p class="text-xs text-gray-400 mb-2">ワンピース</p>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Приключения</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Сёнен</span>
+</div>
+<div class="flex items-center text-xs text-gray-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-eye-line"></i>
+</div>
+<span class="ml-1">1.2M просмотров</span>
+</div>
+</div>
+</div>
+<!-- Popular Anime 2 -->
+<div class="bg-[#2a2b30] rounded overflow-hidden flex">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20serious%20expression%2C%20psychological%20thriller%20scene%2C%20dark%20atmosphere%2C%20detailed%20anime%20style%20artwork%2C%20mysterious%20lighting%2C%20high%20quality%20digital%20art&width=200&height=150&seq=11&orientation=landscape" alt="Популярное аниме" class="w-[120px] h-[120px] object-cover">
+<div class="p-3 flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-sm line-clamp-1">Тетрадь смерти</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.4</span>
+</div>
+</div>
+<p class="text-xs text-gray-400 mb-2">デスノート</p>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Триллер</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Психологическое</span>
+</div>
+<div class="flex items-center text-xs text-gray-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-eye-line"></i>
+</div>
+<span class="ml-1">980K просмотров</span>
+</div>
+</div>
+</div>
+<!-- Popular Anime 3 -->
+<div class="bg-[#2a2b30] rounded overflow-hidden flex">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20giant%20robot%2C%20mecha%20battle%20scene%2C%20futuristic%20setting%2C%20detailed%20anime%20style%20artwork%2C%20technological%20elements%2C%20high%20quality%20digital%20art&width=200&height=150&seq=12&orientation=landscape" alt="Популярное аниме" class="w-[120px] h-[120px] object-cover">
+<div class="p-3 flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-sm line-clamp-1">Евангелион нового поколения</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.2</span>
+</div>
+</div>
+<p class="text-xs text-gray-400 mb-2">新世紀エヴァンゲリオン</p>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Меха</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Психологическое</span>
+</div>
+<div class="flex items-center text-xs text-gray-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-eye-line"></i>
+</div>
+<span class="ml-1">850K просмотров</span>
+</div>
+</div>
+</div>
+<!-- Popular Anime 4 -->
+<div class="bg-[#2a2b30] rounded overflow-hidden flex">
+<img src="https://readdy.ai/api/search-image?query=anime%20character%20with%20school%20setting%2C%20slice%20of%20life%20scene%2C%20peaceful%20atmosphere%2C%20detailed%20anime%20style%20artwork%2C%20soft%20lighting%2C%20high%20quality%20digital%20art&width=200&height=150&seq=13&orientation=landscape" alt="Популярное аниме" class="w-[120px] h-[120px] object-cover">
+<div class="p-3 flex-1">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-semibold text-sm line-clamp-1">Твоё имя</h3>
+<div class="flex items-center">
+<div class="w-4 h-4 flex items-center justify-center text-yellow-400">
+<i class="ri-star-fill"></i>
+</div>
+<span class="text-xs ml-1">9.5</span>
+</div>
+</div>
+<p class="text-xs text-gray-400 mb-2">君の名は。</p>
+<div class="flex flex-wrap gap-1 mb-2">
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Романтика</span>
+<span class="text-xs bg-[#3a3b40] px-2 py-0.5 !rounded-button">Драма</span>
+</div>
+<div class="flex items-center text-xs text-gray-400">
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-eye-line"></i>
+</div>
+<span class="ml-1">920K просмотров</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Upcoming Releases -->
+<div>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-2xl font-bold">Скоро на сайте</h2>
+<a href="#" class="text-primary hover:text-blue-400 transition-colors flex items-center">
+Календарь выхода
+<div class="w-5 h-5 flex items-center justify-center ml-1">
+<i class="ri-calendar-line"></i>
+</div>
+</a>
+</div>
+<div class="bg-[#2a2b30] rounded-lg p-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Upcoming Anime 1 -->
+<div class="flex items-center">
+<div class="w-16 h-16 bg-[#3a3b40] rounded-lg flex flex-col items-center justify-center mr-4">
+<span class="text-primary font-bold text-xl">15</span>
+<span class="text-xs text-gray-400">Мая</span>
+</div>
+<div>
+<h3 class="font-semibold mb-1">Моб Психо 100 IV</h3>
+<div class="flex items-center text-xs text-gray-400">
+<span>Сезон 4</span>
+<span class="mx-2">•</span>
+<span>12 серий</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Anime 2 -->
+<div class="flex items-center">
+<div class="w-16 h-16 bg-[#3a3b40] rounded-lg flex flex-col items-center justify-center mr-4">
+<span class="text-primary font-bold text-xl">18</span>
+<span class="text-xs text-gray-400">Мая</span>
+</div>
+<div>
+<h3 class="font-semibold mb-1">Человек-бензопила 2</h3>
+<div class="flex items-center text-xs text-gray-400">
+<span>Сезон 2</span>
+<span class="mx-2">•</span>
+<span>12 серий</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Anime 3 -->
+<div class="flex items-center">
+<div class="w-16 h-16 bg-[#3a3b40] rounded-lg flex flex-col items-center justify-center mr-4">
+<span class="text-primary font-bold text-xl">22</span>
+<span class="text-xs text-gray-400">Мая</span>
+</div>
+<div>
+<h3 class="font-semibold mb-1">Семья шпиона: Сезон 3</h3>
+<div class="flex items-center text-xs text-gray-400">
+<span>Сезон 3</span>
+<span class="mx-2">•</span>
+<span>12 серий</span>
+</div>
+</div>
+</div>
+<!-- Upcoming Anime 4 -->
+<div class="flex items-center">
+<div class="w-16 h-16 bg-[#3a3b40] rounded-lg flex flex-col items-center justify-center mr-4">
+<span class="text-primary font-bold text-xl">28</span>
+<span class="text-xs text-gray-400">Мая</span>
+</div>
+<div>
+<h3 class="font-semibold mb-1">Клинок, рассекающий демонов: Деревня кузнецов</h3>
+<div class="flex items-center text-xs text-gray-400">
+<span>Фильм</span>
+<span class="mx-2">•</span>
+<span>120 мин</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="w-full md:w-80 space-y-6">
+<!-- Search -->
+<div class="bg-[#2a2b30] rounded-lg p-4">
+<h3 class="font-semibold mb-4">Расширенный поиск</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-sm text-gray-400 mb-1">Жанр</label>
+<div class="relative">
+<select class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 appearance-none pr-8">
+<option>Все жанры</option>
+<option>Боевик</option>
+<option>Комедия</option>
+<option>Драма</option>
+<option>Фэнтези</option>
+<option>Ужасы</option>
+<option>Романтика</option>
+<option>Научная фантастика</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<div class="w-4 h-4 flex items-center justify-center text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm text-gray-400 mb-1">Год выпуска</label>
+<div class="relative">
+<select class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 appearance-none pr-8">
+<option>Все годы</option>
+<option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<div class="w-4 h-4 flex items-center justify-center text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm text-gray-400 mb-1">Тип</label>
+<div class="relative">
+<select class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 appearance-none pr-8">
+<option>Все типы</option>
+<option>ТВ-сериал</option>
+<option>Фильм</option>
+<option>OVA</option>
+<option>ONA</option>
+<option>Спешл</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<div class="w-4 h-4 flex items-center justify-center text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm text-gray-400 mb-1">Статус</label>
+<div class="relative">
+<select class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 appearance-none pr-8">
+<option>Все статусы</option>
+<option>Онгоинг</option>
+<option>Завершен</option>
+<option>Анонсирован</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+<div class="w-4 h-4 flex items-center justify-center text-gray-400">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Только с русской озвучкой</span>
+<label class="custom-switch">
+<input type="checkbox">
+<span class="switch-slider"></span>
+</label>
+</div>
+<button class="w-full bg-primary hover:bg-blue-500 text-white py-2 !rounded-button whitespace-nowrap transition-colors">
+Найти
+</button>
+</div>
+</div>
+<!-- Popular Tags -->
+<div class="bg-[#2a2b30] rounded-lg p-4">
+<h3 class="font-semibold mb-4">Популярные теги</h3>
+<div class="flex flex-wrap gap-2">
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Сёнен</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Исекай</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Романтика</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Фэнтези</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Боевик</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Комедия</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Драма</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Приключения</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Сёдзё</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Психологическое</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Повседневность</a>
+<a href="#" class="genre-tag bg-[#3a3b40] hover:bg-primary/80 text-white text-xs px-3 py-1.5 !rounded-button transition-colors">Меха</a>
+</div>
+</div>
+<!-- Latest Comments -->
+<div class="bg-[#2a2b30] rounded-lg p-4">
+<h3 class="font-semibold mb-4">Последние комментарии</h3>
+<div class="space-y-4 max-h-80 overflow-y-auto custom-scrollbar">
+<!-- Comment 1 -->
+<div class="flex">
+<div class="w-8 h-8 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300">
+<i class="ri-user-line"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<span class="font-medium text-sm">Александр</span>
+<span class="text-xs text-gray-400 ml-2">1 час назад</span>
+</div>
+<p class="text-xs text-gray-300">Новая серия Атаки Титанов просто взрывает мозг! Не могу дождаться продолжения!</p>
+<div class="mt-1 text-xs text-primary">К аниме: Атака Титанов</div>
+</div>
+</div>
+<!-- Comment 2 -->
+<div class="flex">
+<div class="w-8 h-8 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300">
+<i class="ri-user-line"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<span class="font-medium text-sm">Екатерина</span>
+<span class="text-xs text-gray-400 ml-2">2 часа назад</span>
+</div>
+<p class="text-xs text-gray-300">Клинок, рассекающий демонов - лучшее, что я видела в этом году. Анимация на высшем уровне!</p>
+<div class="mt-1 text-xs text-primary">К аниме: Клинок, рассекающий демонов</div>
+</div>
+</div>
+<!-- Comment 3 -->
+<div class="flex">
+<div class="w-8 h-8 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300">
+<i class="ri-user-line"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<span class="font-medium text-sm">Дмитрий</span>
+<span class="text-xs text-gray-400 ml-2">3 часа назад</span>
+</div>
+<p class="text-xs text-gray-300">Магическая битва - это шедевр! Джуджуцу кайсен покорил моё сердце. Годжо лучший персонаж!</p>
+<div class="mt-1 text-xs text-primary">К аниме: Магическая битва</div>
+</div>
+</div>
+<!-- Comment 4 -->
+<div class="flex">
+<div class="w-8 h-8 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+<div class="w-5 h-5 flex items-center justify-center text-gray-300">
+<i class="ri-user-line"></i>
+</div>
+</div>
+<div>
+<div class="flex items-center mb-1">
+<span class="font-medium text-sm">Анна</span>
+<span class="text-xs text-gray-400 ml-2">5 часов назад</span>
+</div>
+<p class="text-xs text-gray-300">Обожаю Моб Психо 100! Жду не дождусь нового сезона. Надеюсь, он будет таким же крутым!</p>
+<div class="mt-1 text-xs text-primary">К аниме: Моб Психо 100</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Newsletter -->
+<div class="bg-gradient-to-r from-primary/20 to-secondary/20 rounded-lg p-4">
+<h3 class="font-semibold mb-2">Подпишись на обновления</h3>
+<p class="text-sm text-gray-300 mb-4">Получай уведомления о новых сериях и релизах</p>
+<div class="flex">
+<input type="email" class="flex-1 bg-[#1a1b1e] text-white border-none !rounded-l-button px-3 py-2" placeholder="Ваш email">
+<button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-r-button whitespace-nowrap transition-colors">
+Подписаться
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#1a1b1e] border-t border-[#2a2b30] mt-10 py-10">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<a href="#" class="flex items-center mb-4">
+<span class="text-primary text-2xl font-['Pacifico']">АнимеГо</span>
+</a>
+<p class="text-gray-400 text-sm mb-4">Лучший сайт для просмотра аниме онлайн в русской озвучке и с русскими субтитрами.</p>
+<div class="flex space-x-3">
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+<div class="w-4 h-4 flex items-center justify-center text-white">
+<i class="ri-telegram-fill"></i>
+</div>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+<div class="w-4 h-4 flex items-center justify-center text-white">
+<i class="ri-vk-fill"></i>
+</div>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+<div class="w-4 h-4 flex items-center justify-center text-white">
+<i class="ri-discord-fill"></i>
+</div>
+</a>
+<a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+<div class="w-4 h-4 flex items-center justify-center text-white">
+<i class="ri-youtube-fill"></i>
+</div>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Навигация</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Главная</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Каталог аниме</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Расписание</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Случайное аниме</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Новости</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Жанры</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Боевик</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Комедия</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Драма</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Фэнтези</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Романтика</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Информация</h4>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">О нас</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Правообладателям</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Пользовательское соглашение</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Политика конфиденциальности</a></li>
+<li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Контакты</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-[#2a2b30] mt-8 pt-8 text-center text-gray-400 text-sm">
+<p>© 2025 АнимеГо. Все права защищены.</p>
+<p class="mt-2">Весь контент на сайте представлен исключительно для ознакомления.</p>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Mobile menu toggle
+const mobileMenuButton = document.querySelector('.ri-menu-line').parentElement;
+if (mobileMenuButton) {
+mobileMenuButton.addEventListener('click', function() {
+// Mobile menu implementation would go here
+alert('Мобильное меню в разработке');
+});
+}
+// Login modal functionality
+const loginButton = document.getElementById('loginButton');
+const loginModal = document.getElementById('loginModal');
+const closeLoginModal = document.getElementById('closeLoginModal');
+const loginForm = document.getElementById('loginForm');
+const rememberMeCheckbox = document.getElementById('rememberMe');
+const checkIcon = rememberMeCheckbox.nextElementSibling.querySelector('i');
+loginButton.addEventListener('click', () => {
+loginModal.classList.remove('hidden');
+document.body.style.overflow = 'hidden';
+});
+closeLoginModal.addEventListener('click', () => {
+loginModal.classList.add('hidden');
+document.body.style.overflow = '';
+});
+loginModal.addEventListener('click', (e) => {
+if (e.target === loginModal) {
+loginModal.classList.add('hidden');
+document.body.style.overflow = '';
+}
+});
+rememberMeCheckbox.addEventListener('change', () => {
+checkIcon.classList.toggle('hidden');
+});
+// VK OAuth configuration
+const VK_CLIENT_ID = 'YOUR_VK_CLIENT_ID';
+const VK_REDIRECT_URI = encodeURIComponent(window.location.origin + '/vk-callback');
+
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg z-50 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+}
+
+function updateUserInterface(userData) {
+    const userActions = document.querySelector('.flex.items-center.space-x-4');
+    userActions.innerHTML = `
+        <div class="flex items-center space-x-3">
+            <img src="${userData.photo}" alt="${userData.name}" class="w-8 h-8 rounded-full">
+            <span class="text-white">${userData.name}</span>
+            <button id="logoutButton" class="text-gray-400 hover:text-white">
+                <div class="w-5 h-5 flex items-center justify-center">
+                    <i class="ri-logout-box-line"></i>
+                </div>
+            </button>
+        </div>
+    `;
+
+    document.getElementById('logoutButton').addEventListener('click', () => {
+        localStorage.removeItem('vkUserData');
+        window.location.reload();
+    });
+}
+
+function handleVKAuth(authWindow) {
+    const checkInterval = setInterval(() => {
+        try {
+            if (authWindow.closed) {
+                clearInterval(checkInterval);
+                return;
+            }
+
+            const currentUrl = authWindow.location.href;
+            if (currentUrl.includes('code=')) {
+                clearInterval(checkInterval);
+                authWindow.close();
+
+                const code = new URL(currentUrl).searchParams.get('code');
+                
+                // Simulate successful authentication for demo
+                const mockUserData = {
+                    name: 'Александр Иванов',
+                    photo: 'https://readdy.ai/api/search-image?query=professional%20headshot%20of%20a%20young%20russian%20man%20with%20friendly%20smile%2C%20high%20quality%20portrait%20photo&width=100&height=100&seq=1&orientation=squarish'
+                };
+
+                localStorage.setItem('vkUserData', JSON.stringify(mockUserData));
+                showNotification('Успешный вход через ВКонтакте!');
+                document.getElementById('loginModal').classList.add('hidden');
+                document.body.style.overflow = '';
+                updateUserInterface(mockUserData);
+            }
+        } catch (e) {
+            // Handle cross-origin errors silently
+        }
+    }, 500);
+}
+
+document.getElementById('vkAuthButton').addEventListener('click', () => {
+    const width = 600;
+    const height = 600;
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2;
+    
+    const authWindow = window.open(
+        `https://oauth.vk.com/authorize?client_id=${VK_CLIENT_ID}&display=popup&redirect_uri=${VK_REDIRECT_URI}&scope=email&response_type=code&v=5.131`,
+        'VK Authorization',
+        `width=${width},height=${height},left=${left},top=${top}`
+    );
+
+    handleVKAuth(authWindow);
+});
+
+// Check if user is already logged in
+const savedUserData = localStorage.getItem('vkUserData');
+if (savedUserData) {
+    updateUserInterface(JSON.parse(savedUserData));
+}
+loginForm.addEventListener('submit', (e) => {
+e.preventDefault();
+const email = document.getElementById('loginEmail').value;
+const password = document.getElementById('loginPassword').value;
+const rememberMe = rememberMeCheckbox.checked;
+console.log('Login attempt:', { email, password, rememberMe });
+showSuccessNotification('Успешный вход!');
+document.getElementById('loginModal').classList.add('hidden');
+document.body.style.overflow = '';
+});
+});
+</script>
+</body>
+</html>
