@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Атака Титанов: Финальный сезон - Смотреть онлайн</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#00b0ff',secondary:'#ff6b00'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1b1e;
+    color: #ffffff;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+.video-container iframe, .video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%);
+    padding: 30px 20px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.video-container:hover .video-controls {
+    opacity: 1;
+}
+.progress-bar {
+    height: 4px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+.progress-fill {
+    height: 100%;
+    background-color: #00b0ff;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+}
+.progress-handle {
+    width: 12px;
+    height: 12px;
+    background-color: #00b0ff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 30%;
+    cursor: pointer;
+}
+.volume-slider {
+    height: 4px;
+    width: 60px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+.volume-fill {
+    height: 100%;
+    background-color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+}
+.volume-handle {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 70%;
+    cursor: pointer;
+}
+.episode-item {
+    transition: all 0.2s ease;
+}
+.episode-item:hover {
+    background-color: rgba(0, 176, 255, 0.1);
+}
+.episode-item.active {
+    background-color: rgba(0, 176, 255, 0.2);
+    border-left: 3px solid #00b0ff;
+}
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #2a2b30;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #00b0ff;
+    border-radius: 8px;
+}
+.quality-dropdown, .audio-dropdown {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background-color: rgba(26, 27, 30, 0.95);
+    border-radius: 8px;
+    min-width: 120px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+    overflow: hidden;
+    display: none;
+}
+.quality-button:hover .quality-dropdown,
+.audio-button:hover .audio-dropdown {
+    display: block;
+}
+.nav-item {
+    position: relative;
+}
+.nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #00b0ff;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+.nav-item:hover::after {
+    width: 100%;
+}
+.custom-radio {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.custom-radio input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.radio-mark {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #3a3b40;
+    margin-right: 8px;
+    position: relative;
+}
+.custom-radio input:checked + .radio-mark {
+    border-color: #00b0ff;
+}
+.custom-radio input:checked + .radio-mark:after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00b0ff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+</style>
+</head>
+<body>
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#1a1b1e] shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <span class="text-primary text-2xl font-['Pacifico']">АнимеГо</span>
+                </a>
+            </div>
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="https://readdy.ai/home/adecbef4-f4fd-4e4f-af53-34f2ef7b7bc3/27478c8d-fa89-44a0-bfb7-568bdc4cd974" data-readdy="true" class="nav-item text-white hover:text-primary transition-colors">Главная</a>
+                <a href="#" class="nav-item text-white hover:text-primary transition-colors">Каталог</a>
+                <a href="#" class="nav-item text-white hover:text-primary transition-colors">Расписание</a>
+                <a href="#" class="nav-item text-white hover:text-primary transition-colors">Случайное</a>
+                <a href="#" class="nav-item text-white hover:text-primary transition-colors">Новости</a>
+            </nav>
+            <!-- Search Bar -->
+            <div class="hidden md:flex items-center relative flex-1 max-w-md mx-6">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+                        <i class="ri-search-line"></i>
+                    </div>
+                </div>
+                <input type="text" class="w-full bg-[#2a2b30] text-white border-none !rounded-button pl-10 pr-4 py-2 focus:outline-none" placeholder="Поиск аниме...">
+            </div>
+            <!-- User Actions -->
+            <div class="flex items-center space-x-4">
+                <button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+                    Войти
+                </button>
+                <button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+                    Регистрация
+                </button>
+                <div class="w-10 h-10 flex items-center justify-center bg-[#2a2b30] rounded-full cursor-pointer hover:bg-[#3a3b40] transition-colors md:hidden">
+                    <i class="ri-menu-line text-white ri-lg"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="pt-16">
+    <!-- Video Player Section -->
+    <section class="w-full bg-black">
+        <div class="container mx-auto px-0 md:px-4">
+            <div class="video-container">
+                <video poster="https://readdy.ai/api/search-image?query=anime%2520scene%2520from%2520Attack%2520on%2520Titan%2520with%2520Eren%2520Yeager%2520and%2520other%2520characters%2520in%2520battle%2520against%2520titans%252C%2520dramatic%2520lighting%252C%2520intense%2520action%252C%2520high%2520quality%2520digital%2520art%252C%2520cinematic%2520composition&width=1280&height=720&seq=1&orientation=landscape"></video>
+                
+                <!-- Video Controls -->
+                <div class="video-controls">
+                    <div class="flex justify-between items-center mb-4">
+                        <button class="text-white hover:text-primary transition-colors">
+                            <div class="w-10 h-10 flex items-center justify-center">
+                                <i class="ri-skip-back-line ri-lg"></i>
+                            </div>
+                        </button>
+                        <button class="text-white hover:text-primary transition-colors">
+                            <div class="w-14 h-14 flex items-center justify-center">
+                                <i class="ri-play-fill ri-2x"></i>
+                            </div>
+                        </button>
+                        <button class="text-white hover:text-primary transition-colors">
+                            <div class="w-10 h-10 flex items-center justify-center">
+                                <i class="ri-skip-forward-line ri-lg"></i>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center">
+                                <button class="text-white hover:text-primary transition-colors mr-2">
+                                    <div class="w-8 h-8 flex items-center justify-center">
+                                        <i class="ri-volume-up-line"></i>
+                                    </div>
+                                </button>
+                                <div class="volume-slider">
+                                    <div class="volume-fill"></div>
+                                    <div class="volume-handle"></div>
+                                </div>
+                            </div>
+                            <span class="text-white text-sm">12:34 / 24:15</span>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <div class="relative quality-button">
+                                <button class="text-white hover:text-primary transition-colors">
+                                    <div class="w-8 h-8 flex items-center justify-center">
+                                        <i class="ri-hd-line"></i>
+                                    </div>
+                                </button>
+                                <div class="quality-dropdown">
+                                    <div class="py-1">
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-primary">1080p</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">720p</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">480p</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">360p</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative audio-button">
+                                <button class="text-white hover:text-primary transition-colors">
+                                    <div class="w-8 h-8 flex items-center justify-center">
+                                        <i class="ri-translate-2"></i>
+                                    </div>
+                                </button>
+                                <div class="audio-dropdown">
+                                    <div class="py-1">
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-primary">Озвучка: Anilibria</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">Озвучка: KANSAI</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">Субтитры</button>
+                                        <button class="w-full text-left px-4 py-2 text-sm hover:bg-[#3a3b40] text-white">Оригинал</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="text-white hover:text-primary transition-colors">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-download-2-line"></i>
+                                </div>
+                            </button>
+                            
+                            <button class="text-white hover:text-primary transition-colors">
+                                <div class="w-8 h-8 flex items-center justify-center">
+                                    <i class="ri-fullscreen-line"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                        <div class="progress-handle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Episode Info Section -->
+    <section class="container mx-auto px-4 py-4">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+            <div>
+                <h1 class="text-2xl font-bold">Атака Титанов: Финальный сезон</h1>
+                <h2 class="text-lg text-gray-300">Серия 16 - "Небо и земля"</h2>
+            </div>
+            <div class="flex space-x-2 mt-2 md:mt-0">
+                <button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors flex items-center">
+                    <div class="w-5 h-5 flex items-center justify-center mr-2">
+                        <i class="ri-heart-line"></i>
+                    </div>
+                    В избранное
+                </button>
+                <button class="bg-[#2a2b30] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors flex items-center">
+                    <div class="w-5 h-5 flex items-center justify-center mr-2">
+                        <i class="ri-download-2-line"></i>
+                    </div>
+                    Скачать
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+            <div class="w-full md:w-3/4">
+                <!-- Episode Navigation -->
+                <div class="bg-[#2a2b30] rounded-lg p-4 mb-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <button class="bg-[#1a1b1e] hover:bg-[#3a3b40] text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                <i class="ri-arrow-left-line"></i>
+                            </div>
+                            Предыдущая серия
+                        </button>
+                        
+                        <div class="relative">
+                            <select class="bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 appearance-none pr-8">
+                                <option>Серия 16</option>
+                                <option>Серия 15</option>
+                                <option>Серия 14</option>
+                                <option>Серия 13</option>
+                                <option>Серия 12</option>
+                                <option>Серия 11</option>
+                                <option>Серия 10</option>
+                                <option>Серия 9</option>
+                                <option>Серия 8</option>
+                                <option>Серия 7</option>
+                                <option>Серия 6</option>
+                                <option>Серия 5</option>
+                                <option>Серия 4</option>
+                                <option>Серия 3</option>
+                                <option>Серия 2</option>
+                                <option>Серия 1</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <div class="w-4 h-4 flex items-center justify-center text-gray-400">
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors flex items-center">
+                            Следующая серия
+                            <div class="w-5 h-5 flex items-center justify-center ml-2">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-sm text-gray-300">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1 text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span>9.8/10</span>
+                            <span class="mx-2">•</span>
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-eye-line"></i>
+                            </div>
+                            <span>1.2M просмотров</span>
+                        </div>
+                        <span>Дата выхода: 14 марта 2023</span>
+                    </div>
+                </div>
+                
+                <!-- Tabs -->
+                <div class="bg-[#2a2b30] rounded-lg overflow-hidden">
+                    <div class="flex border-b border-[#3a3b40]">
+                        <button class="tab-button flex-1 py-3 px-4 text-primary border-b-2 border-primary" data-tab="description">Описание</button>
+                        <button class="tab-button flex-1 py-3 px-4 text-gray-300 hover:text-white transition-colors" data-tab="comments">Комментарии</button>
+                    </div>
+                    
+                    <!-- Description Tab -->
+                    <div id="description" class="tab-content active p-4">
+                        <p class="mb-4">В 16 серии финального сезона "Атаки Титанов" Эрен и его сторонники продолжают свой путь, в то время как бывшие товарищи пытаются остановить их. Противостояние между Марли и Элдией достигает критической точки, и судьба мира висит на волоске.</p>
+                        
+                        <div class="mb-4">
+                            <h3 class="font-semibold mb-2">Доступные озвучки:</h3>
+                            <div class="space-y-2">
+                                <label class="custom-radio">
+                                    <input type="radio" name="audio" checked>
+                                    <span class="radio-mark"></span>
+                                    <span>Anilibria (Студийная многоголосая)</span>
+                                </label>
+                                <label class="custom-radio">
+                                    <input type="radio" name="audio">
+                                    <span class="radio-mark"></span>
+                                    <span>KANSAI (Студийная многоголосая)</span>
+                                </label>
+                                <label class="custom-radio">
+                                    <input type="radio" name="audio">
+                                    <span class="radio-mark"></span>
+                                    <span>Субтитры</span>
+                                </label>
+                                <label class="custom-radio">
+                                    <input type="radio" name="audio">
+                                    <span class="radio-mark"></span>
+                                    <span>Оригинал (Японский)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="font-semibold mb-2">Теги:</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-[#3a3b40] text-white text-xs px-3 py-1.5 !rounded-button">Экшен</span>
+                                <span class="bg-[#3a3b40] text-white text-xs px-3 py-1.5 !rounded-button">Драма</span>
+                                <span class="bg-[#3a3b40] text-white text-xs px-3 py-1.5 !rounded-button">Фэнтези</span>
+                                <span class="bg-[#3a3b40] text-white text-xs px-3 py-1.5 !rounded-button">Сёнен</span>
+                                <span class="bg-[#3a3b40] text-white text-xs px-3 py-1.5 !rounded-button">Постапокалипсис</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comments Tab -->
+                    <div id="comments" class="tab-content p-4">
+                        <div class="mb-4">
+                            <h3 class="font-semibold mb-2">Оставить комментарий</h3>
+                            <textarea class="w-full bg-[#1a1b1e] text-white border border-[#3a3b40] !rounded-button px-3 py-2 min-h-[100px] focus:outline-none focus:border-primary" placeholder="Напишите ваше мнение о серии..."></textarea>
+                            <div class="flex justify-end mt-2">
+                                <button class="bg-primary hover:bg-blue-500 text-white px-4 py-2 !rounded-button whitespace-nowrap transition-colors">
+                                    Отправить
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+                                    <div class="w-6 h-6 flex items-center justify-center text-gray-300">
+                                        <i class="ri-user-line"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-medium">Алексей Петров</span>
+                                        <span class="text-xs text-gray-400">15 минут назад</span>
+                                    </div>
+                                    <p class="text-gray-300 mb-2">Эта серия просто взрывает мозг! Не ожидал такого поворота событий. Эрен действительно изменился, и теперь я не знаю, кому сопереживать. Анимация на высшем уровне!</p>
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-up-line"></i>
+                                            </div>
+                                            <span>42</span>
+                                        </button>
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-down-line"></i>
+                                            </div>
+                                            <span>3</span>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            Ответить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+                                    <div class="w-6 h-6 flex items-center justify-center text-gray-300">
+                                        <i class="ri-user-line"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-medium">Мария Соколова</span>
+                                        <span class="text-xs text-gray-400">1 час назад</span>
+                                    </div>
+                                    <p class="text-gray-300 mb-2">Я в шоке от происходящего! Каждая серия финального сезона лучше предыдущей. Особенно впечатлила сцена с Микасой и Армином. Их диалог был таким эмоциональным. Жду не дождусь следующей серии!</p>
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-up-line"></i>
+                                            </div>
+                                            <span>28</span>
+                                        </button>
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-down-line"></i>
+                                            </div>
+                                            <span>1</span>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            Ответить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-[#3a3b40] flex items-center justify-center mr-3 flex-shrink-0">
+                                    <div class="w-6 h-6 flex items-center justify-center text-gray-300">
+                                        <i class="ri-user-line"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="font-medium">Игорь Васильев</span>
+                                        <span class="text-xs text-gray-400">2 часа назад</span>
+                                    </div>
+                                    <p class="text-gray-300 mb-2">Сюжет становится всё сложнее и запутаннее. Иногда трудно уследить за всеми линиями, но это делает аниме ещё интереснее. Озвучка от Anilibria как всегда на высоте! Спасибо за качественный перевод.</p>
+                                    <div class="flex items-center space-x-4 text-sm">
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-up-line"></i>
+                                            </div>
+                                            <span>19</span>
+                                        </button>
+                                        <button class="flex items-center text-gray-400 hover:text-primary transition-colors">
+                                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                                <i class="ri-thumb-down-line"></i>
+                                            </div>
+                                            <span>0</span>
+                                        </button>
+                                        <button class="text-gray-400 hover:text-primary transition-colors">
+                                            Ответить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="w-full md:w-1/4">
+                <div class="bg-[#2a2b30] rounded-lg overflow-hidden">
+                    <div class="p-4 border-b border-[#3a3b40]">
+                        <h3 class="font-semibold">Все серии</h3>
+                    </div>
+                    <div class="max-h-[400px] overflow-y-auto custom-scrollbar">
+                        <div class="episode-item active p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 16</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Небо и земля</p>
+                                </div>
+                                <span class="text-xs bg-primary/80 px-2 py-1 !rounded-button">Сейчас</span>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 15</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Одинокий солдат</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 14</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Обманщик</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 13</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Дети леса</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 12</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Гиды</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 11</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Контратака человечества</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 10</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Доброе сердце</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 9</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Храбрые добровольцы</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 8</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Засада</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 7</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Битва за Либерио</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 6</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Военный молот</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 5</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Объявление войны</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 4</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">От одной руки к другой</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 3</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Дверь надежды</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3 border-b border-[#3a3b40]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 2</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">Поезд полуночи</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="episode-item p-3">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="font-medium">Серия 1</span>
+                                    <p class="text-sm text-gray-400 line-clamp-1">По ту сторону моря</p>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center mr-1">
+                                        <i class="ri-eye-line"></i>
+                                    </div>
+                                    <span>Просмотрено</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendations -->
+                <div class="bg-[#2a2b30] rounded-lg overflow-hidden mt-4">
+                    <div class="p-4 border-b border-[#3a3b40]">
+                        <h3 class="font-semibold">Рекомендуем посмотреть</h3>
+                    </div>
+                    <div>
+                        <div class="p-3 border-b border-[#3a3b40] flex items-center">
+                            <img src="https://readdy.ai/api/search-image?query=anime%2520character%2520with%2520red%2520hair%252C%2520action%2520pose%252C%2520battle%2520scene%252C%2520intense%2520expression%252C%2520detailed%2520anime%2520style%2520artwork%252C%2520dynamic%2520lighting%252C%2520high%2520quality%2520digital%2520art&width=100&height=60&seq=4&orientation=landscape" alt="Аниме" class="w-16 h-16 object-cover rounded mr-3">
+                            <div>
+                                <h4 class="font-medium text-sm">Клинок, рассекающий демонов</h4>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center text-yellow-400 mr-1">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <span>9.5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 border-b border-[#3a3b40] flex items-center">
+                            <img src="https://readdy.ai/api/search-image?query=anime%2520character%2520with%2520black%2520hair%252C%2520cyberpunk%2520setting%252C%2520futuristic%2520elements%252C%2520detailed%2520anime%2520style%2520artwork%252C%2520neon%2520lighting%252C%2520serious%2520expression%252C%2520high%2520quality%2520digital%2520art&width=100&height=60&seq=5&orientation=landscape" alt="Аниме" class="w-16 h-16 object-cover rounded mr-3">
+                            <div>
+                                <h4 class="font-medium text-sm">Киберпанк: Бегущие по краю</h4>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center text-yellow-400 mr-1">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <span>8.9</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 flex items-center">
+                            <img src="https://readdy.ai/api/search-image?query=anime%2520character%2520with%2520white%2520hair%252C%2520post-apocalyptic%2520setting%252C%2520survival%2520theme%252C%2520detailed%2520anime%2520style%2520artwork%252C%2520gritty%2520atmosphere%252C%2520determined%2520expression%252C%2520high%2520quality%2520digital%2520art&width=100&height=60&seq=8&orientation=landscape" alt="Аниме" class="w-16 h-16 object-cover rounded mr-3">
+                            <div>
+                                <h4 class="font-medium text-sm">Обещанный Неверленд</h4>
+                                <div class="flex items-center text-xs text-gray-400">
+                                    <div class="w-3 h-3 flex items-center justify-center text-yellow-400 mr-1">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <span>9.3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#1a1b1e] border-t border-[#2a2b30] mt-10 py-10">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <a href="#" class="flex items-center mb-4">
+                    <span class="text-primary text-2xl font-['Pacifico']">АнимеГо</span>
+                </a>
+                <p class="text-gray-400 text-sm mb-4">Лучший сайт для просмотра аниме онлайн в русской озвучке и с русскими субтитрами.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center text-white">
+                            <i class="ri-telegram-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center text-white">
+                            <i class="ri-vk-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center text-white">
+                            <i class="ri-discord-fill"></i>
+                        </div>
+                    </a>
+                    <a href="#" class="w-8 h-8 flex items-center justify-center bg-[#2a2b30] rounded-full hover:bg-primary transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center text-white">
+                            <i class="ri-youtube-fill"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Навигация</h4>
+                <ul class="space-y-2">
+                    <li><a href="https://readdy.ai/home/adecbef4-f4fd-4e4f-af53-34f2ef7b7bc3/27478c8d-fa89-44a0-bfb7-568bdc4cd974" data-readdy="true" class="text-gray-400 hover:text-primary transition-colors">Главная</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Каталог аниме</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Расписание</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Случайное аниме</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Новости</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Жанры</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Боевик</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Комедия</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Драма</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Фэнтези</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Романтика</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Информация</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">О нас</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Правообладателям</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Пользовательское соглашение</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Политика конфиденциальности</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-[#2a2b30] mt-8 pt-8 text-center text-gray-400 text-sm">
+            <p>© 2025 АнимеГо. Все права защищены.</p>
+            <p class="mt-2">Весь контент на сайте представлен исключительно для ознакомления.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Tab switching
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs
+            tabButtons.forEach(btn => {
+                btn.classList.remove('text-primary', 'border-primary');
+                btn.classList.add('text-gray-300');
+            });
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Add active class to current tab
+            this.classList.add('text-primary', 'border-primary');
+            this.classList.remove('text-gray-300');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+    
+    // Video player controls simulation
+    const playButton = document.querySelector('.ri-play-fill').parentElement.parentElement;
+    let isPlaying = false;
+    
+    playButton.addEventListener('click', function() {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+            this.querySelector('i').classList.remove('ri-play-fill');
+            this.querySelector('i').classList.add('ri-pause-fill');
+        } else {
+            this.querySelector('i').classList.remove('ri-pause-fill');
+            this.querySelector('i').classList.add('ri-play-fill');
+        }
+    });
+    
+    // Episode list item click
+    const episodeItems = document.querySelectorAll('.episode-item');
+    
+    episodeItems.forEach(item => {
+        item.addEventListener('click', function() {
+            episodeItems.forEach(ep => ep.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuButton = document.querySelector('.ri-menu-line').parentElement;
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', function() {
+            // Mobile menu implementation would go here
+            alert('Мобильное меню в разработке');
+        });
+    }
+});
+</script>
+</body>
+</html>
