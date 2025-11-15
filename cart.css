@@ -1,0 +1,93 @@
+/* cart.css - дополнительные стили для корзины */
+.empty-cart {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.empty-cart .btn {
+    margin-top: 20px;
+}
+
+.order-summary {
+    background: var(--glass-medium);
+    border: 1px solid var(--border-light);
+}
+
+.cart-item {
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    background: var(--glass-light);
+    color: var(--text-primary);
+}
+
+.quantity-controls .btn {
+    padding: 8px 12px;
+    min-width: 40px;
+}
+
+.promo-code {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: var(--glass-light);
+    border-radius: 8px;
+}
+
+.promo-code input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    background: var(--glass-medium);
+    color: var(--text-primary);
+}
+
+.order-form {
+    background: var(--glass-light);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.order-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.order-form input,
+.order-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background: var(--glass-medium);
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+    outline: none;
+    border-color: var(--soul-blue);
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании - SHINI-PTOP</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="bw-glass.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="TechStore">
+                <span>SHINI-PTOP</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="about.html" class="active">О компании</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="documentation.html">Документация</a>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html" class="cart-btn">
+                    🛒 Корзина <span class="cart-count">0</span>
+                </a>
+                <a href="login.html" class="btn" id="login-btn">Войти</a>
+                <a href="register.html" class="btn" id="register-btn">Регистрация</a>
+                <a href="account.html" class="btn" id="account-btn" style="display: none;">Кабинет</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="about" style="margin-top: 100px; padding: 60px 0;">
+        <div class="container">
+            <div class="about-header glass" style="padding: 40px; text-align: center; margin-bottom: 50px;">
+                <h1>О компании Shini-ptop</h1>
+                <p style="font-size: 1.2em; opacity: 0.9; margin-top: 20px;">
+                    Мы - ведущий магазин ноутбуков в России с 2020 года
+                </p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;">
+                    <div>
+                        <h2>Наша миссия</h2>
+                        <p style="line-height: 1.8; margin-bottom: 30px;">
+                            Мы помогаем нашим клиентам найти идеальный ноутбук для работы, учебы, 
+                            творчества и игр. Наша цель - сделать современные технологии доступными 
+                            каждому.
+                        </p>
+                        
+                        <h2>Почему мы?</h2>
+                        <div class="advantages">
+                            <div class="advantage glass" style="padding: 20px; margin-bottom: 15px;">
+                                <h3>🛡️ Гарантия качества</h3>
+                                <p>Все товары проходят тщательную проверку перед продажей</p>
+                            </div>
+                            <div class="advantage glass" style="padding: 20px; margin-bottom: 15px;">
+                                <h3>🚀 Быстрая доставка</h3>
+                                <p>Доставляем заказы по всей России за 1-3 дня</p>
+                            </div>
+                            <div class="advantage glass" style="padding: 20px;">
+                                <h3>💬 Экспертная поддержка</h3>
+                                <p>Наши консультанты помогут с выбором 24/7</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats glass" style="padding: 40px; text-align: center;">
+                        <h2 style="margin-bottom: 30px;">Наши достижения</h2>
+                        <div class="stat-item" style="margin-bottom: 25px;">
+                            <div style="font-size: 2.5em; color: #0078d4; font-weight: 700;">10 000+</div>
+                            <div style="opacity: 0.8;">Довольных клиентов</div>
+                        </div>
+                        <div class="stat-item" style="margin-bottom: 25px;">
+                            <div style="font-size: 2.5em; color: #0078d4; font-weight: 700;">4 года</div>
+                            <div style="opacity: 0.8;">На рынке</div>
+                        </div>
+                        <div class="stat-item">
+                            <div style="font-size: 2.5em; color: #0078d4; font-weight: 700;">50+</div>
+                            <div style="opacity: 0.8;">Брендов в каталоге</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Команда -->
+                <div class="team-section" style="margin-top: 80px;">
+                    <div class="glass" style="padding: 40px;">
+                        <h2 style="text-align: center; margin-bottom: 40px;">Наша команда</h2>
+                        <div class="team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+                            <!-- Сотрудник 1 -->
+                            <div class="team-member" style="text-align: center;">
+                                <div class="member-photo glass" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3em;">
+                                    👨‍💼
+                                </div>
+                                <h3>Алексей Иванов</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 10px;">CEO и основатель</p>
+                                <p style="font-size: 0.9em;">Основал компанию в 2020 году с целью сделать технологии доступными</p>
+                            </div>
+                            
+                            <!-- Сотрудник 2 -->
+                            <div class="team-member" style="text-align: center;">
+                                <div class="member-photo glass" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3em;">
+                                    👩‍💻
+                                </div>
+                                <h3>Мария Петрова</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 10px;">Технический директор</p>
+                                <p style="font-size: 0.9em;">Специалист с 10-летним опытом в IT-индустрии</p>
+                            </div>
+                            
+                            <!-- Сотрудник 3 -->
+                            <div class="team-member" style="text-align: center;">
+                                <div class="member-photo glass" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3em;">
+                                    👨‍🔧
+                                </div>
+                                <h3>Дмитрий Сидоров</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 10px;">Главный инженер</p>
+                                <p style="font-size: 0.9em;">Обеспечивает качество каждого проданного ноутбука</p>
+                            </div>
+                            
+                            <!-- Сотрудник 4 -->
+                            <div class="team-member" style="text-align: center;">
+                                <div class="member-photo glass" style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 3em;">
+                                    👩‍💼
+                                </div>
+                                <h3>Анна Козлова</h3>
+                                <p style="color: var(--text-secondary); margin-bottom: 10px;">Менеджер по продажам</p>
+                                <p style="font-size: 0.9em;">Помогла более 2000 клиентов найти идеальный ноутбук</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shini-ptop</h3>
+                    <p>Магазин качественных ноутбуков с 2020 года</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📞 +7 (999) 123-45-67</p>
+                    <p>✉️ info@shiniptop.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Время работы</h3>
+                    <p>Пн-Пт: 9:00-21:00</p>
+                    <p>Сб-Вс: 10:00-20:00</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Shini-ptop. Магазин ноутбуков.</p>
+        </div>
+    </footer>
+
+    <!-- Чат-помощник -->
+    <div id="chat-assistant" class="chat-assistant">
+        <div id="chat-toggle" class="chat-toggle">💬</div>
+        <div id="chat-window" class="chat-window glass">
+            <div class="chat-header">
+                <h3>Помощник Shini-ptop</h3>
+                <button id="chat-close" class="chat-close">×</button>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    <p>Привет! Я ваш помощник. Чем могу помочь?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Введите ваш вопрос...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="fixes.js"></script>
+</body>
+</html>

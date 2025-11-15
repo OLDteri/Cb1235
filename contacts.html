@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - SHINI-PTOP</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="bw-glass.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="TechStore">
+                <span>SHINI-PTOP</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="about.html">О компании</a>
+                <a href="contacts.html" class="active">Контакты</a>
+                <a href="documentation.html">Документация</a>
+            </nav>
+            <div class="header-actions">
+                <button class="cart-btn">
+                    🛒 Корзина <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="contacts" style="margin-top: 100px; padding: 60px 0;">
+        <div class="container">
+            <div class="contacts-header glass" style="padding: 40px; text-align: center; margin-bottom: 50px;">
+                <h1>Контакты</h1>
+                <p style="font-size: 1.2em; opacity: 0.9; margin-top: 20px;">
+                    Свяжитесь с нами любым удобным способом
+                </p>
+            </div>
+
+            <div class="contacts-content">
+                <div class="contacts-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 50px;">
+                    <!-- Контактная информация -->
+                    <div>
+                        <div class="contact-info glass" style="padding: 30px; margin-bottom: 30px;">
+                            <h2>Контактная информация</h2>
+                            <div class="contact-item" style="margin: 20px 0;">
+                                <h3>📞 Телефон</h3>
+                                <p>+7 (999) 123-45-67</p>
+                                <p>+7 (495) 123-45-68</p>
+                            </div>
+                            <div class="contact-item" style="margin: 20px 0;">
+                                <h3>✉️ Email</h3>
+                                <p>info@shiniptop.ru</p>
+                                <p>support@shiniptop.ru</p>
+                            </div>
+                            <div class="contact-item" style="margin: 20px 0;">
+                                <h3>🏢 Адрес</h3>
+                                <p>г. Москва, ул. Технологическая, 15</p>
+                                <p>БЦ "Технопарк", этаж 3, офис 301</p>
+                            </div>
+                        </div>
+
+                        <div class="business-hours glass" style="padding: 30px;">
+                            <h2>Время работы</h2>
+                            <div style="margin-top: 20px;">
+                                <p><strong>Пн-Пт:</strong> 9:00-21:00</p>
+                                <p><strong>Сб-Вс:</strong> 10:00-20:00</p>
+                                <p style="margin-top: 15px; color: var(--text-secondary);">
+                                    * Сервисный центр работает с 10:00 до 19:00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Форма обратной связи -->
+                    <div>
+                        <div class="contact-form glass" style="padding: 30px;">
+                            <h2>Обратная связь</h2>
+                            <form id="feedback-form" style="margin-top: 20px;">
+                                <div style="margin-bottom: 20px;">
+                                    <label for="name" style="display: block; margin-bottom: 5px;">Ваше имя</label>
+                                    <input type="text" id="name" name="name" required 
+                                           style="width: 100%; padding: 12px; border: 1px solid var(--border-light); 
+                                                  border-radius: 8px; background: var(--glass-light); color: var(--text-primary);">
+                                </div>
+                                
+                                <div style="margin-bottom: 20px;">
+                                    <label for="email" style="display: block; margin-bottom: 5px;">Email</label>
+                                    <input type="email" id="email" name="email" required 
+                                           style="width: 100%; padding: 12px; border: 1px solid var(--border-light); 
+                                                  border-radius: 8px; background: var(--glass-light); color: var(--text-primary);">
+                                </div>
+                                
+                                <div style="margin-bottom: 20px;">
+                                    <label for="phone" style="display: block; margin-bottom: 5px;">Телефон</label>
+                                    <input type="tel" id="phone" name="phone" 
+                                           style="width: 100%; padding: 12px; border: 1px solid var(--border-light); 
+                                                  border-radius: 8px; background: var(--glass-light); color: var(--text-primary);">
+                                </div>
+                                
+                                <div style="margin-bottom: 20px;">
+                                    <label for="message" style="display: block; margin-bottom: 5px;">Сообщение</label>
+                                    <textarea id="message" name="message" rows="5" required 
+                                              style="width: 100%; padding: 12px; border: 1px solid var(--border-light); 
+                                                     border-radius: 8px; background: var(--glass-light); color: var(--text-primary); 
+                                                     resize: vertical;"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn" style="width: 100%;">Отправить сообщение</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карта -->
+                <div class="map-section" style="margin-top: 50px;">
+                    <div class="glass" style="padding: 30px;">
+                        <h2 style="margin-bottom: 20px;">Мы на карте</h2>
+                        <div style="height: 400px; background: var(--glass-light); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 3em; margin-bottom: 20px;">🗺️</div>
+                                <p>г. Москва, ул. Технологическая, 15</p>
+                                <p style="color: var(--text-secondary); margin-top: 10px;">Метро: Технопарк (5 минут пешком)</p>
+                                <button class="btn" style="margin-top: 20px;" onclick="openInMap()">Открыть в картах</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shini-ptop</h3>
+                    <p>Магазин качественных ноутбуков с 2020 года</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📞 +7 (999) 123-45-67</p>
+                    <p>✉️ info@shiniptop.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Время работы</h3>
+                    <p>Пн-Пт: 9:00-21:00</p>
+                    <p>Сб-Вс: 10:00-20:00</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Shini-ptop. Магазин ноутбуков.</p>
+        </div>
+    </footer>
+
+    <!-- Чат-помощник -->
+    <div id="chat-assistant" class="chat-assistant">
+        <div id="chat-toggle" class="chat-toggle">💬</div>
+        <div id="chat-window" class="chat-window glass">
+            <div class="chat-header">
+                <h3>42-42-564</h3>
+                <button id="chat-close" class="chat-close">×</button>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    <p>Привет! Я ваш помощник. Чем могу помочь?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Введите ваш вопрос...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Обработка формы обратной связи
+        document.getElementById('feedback-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+
+        function openInMap() {
+            window.open('https://yandex.ru/maps/-/CDUyIJgs', '_blank');
+        }
+    </script>
+
+    <script src="chat.js"></script>
+    <script src="script.js"></script>
+    <script src="fixes.js"></script>
+</body>
+</html>

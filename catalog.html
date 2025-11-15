@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог ноутбуков - SHINI-PTOP</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="bw-glass.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="TechStore">
+                <span>SHINI-PTOP</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="about.html">О компании</a>
+                <a href="contacts.html">Контакты</a>
+                <a href="documentation.html">Документация</a> <!-- Добавьте эту строку -->
+            </nav>
+            <div class="header-actions">
+                <button class="cart-btn">
+                    🛒 Корзина <span class="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="catalog" style="margin-top: 100px; padding: 40px 0;">
+        <div class="container">
+            <h1>Каталог ноутбуков</h1>
+            
+            <!-- Фильтры -->
+            <div class="filters glass" style="padding: 25px; margin: 30px 0;">
+                <h3>Фильтры</h3>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Бренд:</label>
+                        <select class="filter-select">
+                            <option value="">Все бренды</option>
+                            <option value="asus">ASUS</option>
+                            <option value="apple">Apple</option>
+                            <option value="lenovo">Lenovo</option>
+                            <option value="hp">HP</option>
+                            <option value="dell">Dell</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Цена:</label>
+                        <select class="filter-select">
+                            <option value="">Любая цена</option>
+                            <option value="0-50000">До 50 000 ₽</option>
+                            <option value="50000-100000">50 000 - 100 000 ₽</option>
+                            <option value="100000-150000">100 000 - 150 000 ₽</option>
+                            <option value="150000+">От 150 000 ₽</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Процессор:</label>
+                        <select class="filter-select">
+                            <option value="">Любой</option>
+                            <option value="i3">Intel Core i3</option>
+                            <option value="i5">Intel Core i5</option>
+                            <option value="i7">Intel Core i7</option>
+                            <option value="i9">Intel Core i9</option>
+                            <option value="ryzen5">AMD Ryzen 5</option>
+                            <option value="ryzen7">AMD Ryzen 7</option>
+                            <option value="m1">Apple M1/M2/M3</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Видеокарта:</label>
+                        <select class="filter-select">
+                            <option value="">Любая</option>
+                            <option value="integrated">Интегрированная</option>
+                            <option value="rtx3050">RTX 3050</option>
+                            <option value="rtx4060">RTX 4060</option>
+                            <option value="rtx4070">RTX 4070</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сетка товаров -->
+            <div class="products-grid">
+                <!-- Ноутбуки будут добавляться через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Shini-ptop</h3>
+                    <p>Магазин качественных ноутбуков с 2020 года</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>📞 +7 (999) 123-45-67</p>
+                    <p>✉️ info@shiniptop.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Время работы</h3>
+                    <p>Пн-Пт: 9:00-21:00</p>
+                    <p>Сб-Вс: 10:00-20:00</p>
+                </div>
+            </div>
+            <p>&copy; 2024 Shini-ptop. Магазин ноутбуков.</p>
+        </div>
+    </footer>
+
+        <!-- Чат-помощник -->
+    <div id="chat-assistant" class="chat-assistant">
+        <div id="chat-toggle" class="chat-toggle">💬</div>
+        <div id="chat-window" class="chat-window glass">
+            <div class="chat-header">
+                <h3>Помощник</h3>
+                <button id="chat-close" class="chat-close">×</button>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    <p>Привет! Я ваш помощник. Чем могу помочь?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Введите ваш вопрос...">
+                <button id="chat-send">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+    <script src="catalog.js"></script>
+    <script src="fixes.js"></script>
+</body>
+</html>
